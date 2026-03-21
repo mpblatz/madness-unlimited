@@ -1,1 +1,1 @@
-# Madness Unlimited — Unlimited access to March Madness Live
+# Madness Unlimited — March Madness Live Chrome Extension
