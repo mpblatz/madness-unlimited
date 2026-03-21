@@ -67,16 +67,11 @@
             return { total: 14, domains: { ".ncaa.com": 14 } };
         }
 
-        const result = { total: 0, domains: {} };
-        const cookies = await chrome.cookies.getAll({ domain: "ncaa.com" });
-        for (const cookie of cookies) {
-            const protocol = cookie.secure ? "https" : "http";
-            const url = `${protocol}://${cookie.domain.replace(/^\./, "")}${cookie.path}`;
-            await chrome.cookies.remove({ url, name: cookie.name });
-            result.total++;
-            result.domains[cookie.domain] = (result.domains[cookie.domain] || 0) + 1;
-        }
-        return result;
+        return new Promise((resolve) => {
+            chrome.runtime.sendMessage({ action: "clearCookies" }, (response) => {
+                resolve(response);
+            });
+        });
     }
 
     resetBtn.addEventListener("click", async () => {
