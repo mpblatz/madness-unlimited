@@ -14,7 +14,3 @@ The extension uses Chrome's `cookies` API to clear all cookies associated with `
  
 - `cookies` — required to read and remove NCAA.com cookies
 - `*://*.ncaa.com/*` — host permission scoped only to NCAA domains
- 
-## License
- 
-MIT
