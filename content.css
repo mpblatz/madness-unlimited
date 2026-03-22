@@ -1,32 +1,25 @@
 @font-face {
     font-family: "United Italic";
-    src: url("./fonts/united-italic.otf") format("opentype");
+    src: url("chrome-extension://__MSG_@@extension_id__/fonts/united-italic.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Poppins Medium";
-    src: url("./fonts/poppins.ttf") format("opentype");
+    src: url("chrome-extension://__MSG_@@extension_id__/fonts/poppins.ttf");
     font-weight: normal;
     font-style: normal;
-}
-
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: #fff;
-    font-family: "Poppins Medium", sans-serif;
-    font-size: 14px;
 }
 
 /* ============================================
      SIDE TAB CONTAINER
      ============================================ */
 #mu-container {
+    box-sizing: border-box;
+    color: #fff;
+    font-family: "Poppins Medium", sans-serif;
+    font-size: 14px;
     position: fixed;
     right: 0;
     z-index: 999999;
@@ -106,6 +99,9 @@
 #mu-reset {
     width: 100%;
     padding: 14px 16px;
+    color: #fff;
+    font-family: "Poppins Medium", sans-serif;
+    font-size: 14px;
     border: none;
     border-radius: 10px;
     background: linear-gradient(135deg, #ff8c00 0%, #e65100 100%);

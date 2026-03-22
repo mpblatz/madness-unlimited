@@ -1,6 +1,6 @@
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
     if (msg.action === "clearCookies") {
-        chrome.cookies.getAll({ domain: "ncaa.com" }, (cookies) => {
+        chrome.cookies.getAll({ domain: ".ncaa.com" }, (cookies) => {
             let count = 0;
             const total = cookies.length;
             if (total === 0) return sendResponse({ total: 0 });
@@ -14,6 +14,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
                 });
             });
         });
-        return true; // keeps sendResponse alive for async
+        return true;
     }
 });

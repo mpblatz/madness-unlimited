@@ -1,13 +1,25 @@
 (() => {
-    const container = document.getElementById("mu-container");
+    // build the UI
+    const container = document.createElement("div");
+    container.id = "mu-container";
+    container.innerHTML = `
+        <div id="mu-tab">
+            <img id="mu-tab-icon" src="${chrome.runtime.getURL("icons/icon128-transparent.png")}" width="40" height="40" />
+        </div>
+        <div id="mu-panel">
+            <div class="panel-body">
+                <div class="panel-title">Madness<br/>Unlimited</div>
+                <div class="panel-sub">Refresh the page after your access is reset</div>
+                <button id="mu-reset">Reset Free Access</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(container);
+
     const tab = document.getElementById("mu-tab");
     const resetBtn = document.getElementById("mu-reset");
-    const status = document.getElementById("mu-status");
 
-    // mock for local preview
-    const isMock = typeof chrome === "undefined" || !chrome.cookies;
-
-    // open / close popup
+    // open / close panel
     let isOpen = false;
 
     function toggle() {
@@ -15,8 +27,7 @@
         container.classList.toggle("open", isOpen);
     }
 
-    tab.addEventListener("click", (e) => {
-        // only toggle if not dragging
+    tab.addEventListener("click", () => {
         if (!wasDragged) toggle();
     });
 
@@ -26,7 +37,6 @@
     let dragStartY = 0;
     let containerStartTop = 0;
 
-    // initialize position
     const savedY = localStorage.getItem("mu-pos-y");
     container.style.top = savedY ? savedY + "px" : "30%";
 
@@ -52,34 +62,19 @@
             isDragging = false;
             document.body.style.cursor = "";
             localStorage.setItem("mu-pos-y", parseInt(container.style.top));
-            // reset wasDragged after a tick so click handler can check it
             setTimeout(() => {
                 wasDragged = false;
             }, 0);
         }
     });
 
-    // reset button
-    async function clearCookies() {
-        if (isMock) {
-            // simulate a delay and fake result for local preview
-            await new Promise((r) => setTimeout(r, 800));
-            return { total: 14, domains: { ".ncaa.com": 14 } };
-        }
-
-        return new Promise((resolve) => {
-            chrome.runtime.sendMessage({ action: "clearCookies" }, (response) => {
-                resolve(response);
-            });
-        });
-    }
-
+    // reset button — sends message to background service worker
     resetBtn.addEventListener("click", async () => {
         resetBtn.disabled = true;
         resetBtn.textContent = "Resetting...";
 
         try {
-            await clearCookies();
+            const response = await chrome.runtime.sendMessage({ action: "clearCookies" });
             resetBtn.textContent = "Free Access Reset ✓";
             resetBtn.classList.add("success");
         } catch (err) {
