@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Madness Unlimited",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Unlimited Access To March Madness Live",
     "permissions": ["cookies"],
     "host_permissions": ["*://*.ncaa.com/*"],
