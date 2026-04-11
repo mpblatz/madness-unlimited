@@ -1,0 +1,26 @@
+{
+  "name": "madness-unlimited",
+  "version": "1.0.0",
+  "description": "Watch every game of the NCAA March Madness tournament without hitting the free preview limit. One click resets your access so you never miss a buzzer beater.",
+  "main": "background.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpblatz/madness-unlimited.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mpblatz/madness-unlimited/issues"
+  },
+  "homepage": "https://github.com/mpblatz/madness-unlimited#readme",
+  "devDependencies": {
+    "@types/chrome": "^0.1.40",
+    "typescript": "^6.0.2"
+  }
+}
